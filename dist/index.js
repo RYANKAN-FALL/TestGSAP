@@ -3,7 +3,7 @@
   // bin/live-reload.js
   new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
 
-  // node_modules/.pnpm/@finsweet+ts-utils@0.40.0/node_modules/@finsweet/ts-utils/dist/webflow/getPublishDate.js
+  // node_modules/@finsweet/ts-utils/dist/webflow/getPublishDate.js
   var getPublishDate = (page = document) => {
     const publishDatePrefix = "Last Published:";
     for (const node of page.childNodes) {
