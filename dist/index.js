@@ -31,7 +31,7 @@
   // src/index.ts
   window.Webflow = window.Webflow || [];
   window.Webflow.push(async () => {
-    const name = "John Doe";
+    const name = "YOGA";
     greetUser(name);
     function searchCMS(titleToSearch) {
       const itemElements = document.querySelectorAll('[data-element="cms-item"]');
@@ -41,10 +41,13 @@
       const searchQuery = titleToSearch.toLowerCase();
       titleElements.forEach((titleElement, index) => {
         const titleText = titleElement.textContent?.toLowerCase();
-        if (titleText && titleText.includes(searchQuery)) {
-          const correspondingItem = itemElements[index];
-          console.log("Title Text:", titleText);
-          console.log("Corresponding CMS Item:", correspondingItem);
+        const correspondingItem = itemElements[index];
+        if (correspondingItem) {
+          if (titleText && titleText.includes(searchQuery)) {
+            correspondingItem.style.display = "block";
+          } else {
+            correspondingItem.style.display = "none";
+          }
         }
       });
     }
