@@ -3,7 +3,7 @@
   // bin/live-reload.js
   new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
 
-  // node_modules/.pnpm/@finsweet+ts-utils@0.40.0/node_modules/@finsweet/ts-utils/dist/webflow/getPublishDate.js
+  // node_modules/@finsweet/ts-utils/dist/webflow/getPublishDate.js
   var getPublishDate = (page = document) => {
     const publishDatePrefix = "Last Published:";
     for (const node of page.childNodes) {
@@ -29,35 +29,19 @@
   };
 
   // src/index.ts
-  window.Webflow = window.Webflow || [];
-  window.Webflow.push(async () => {
-    const name = "YOGA";
-    greetUser(name);
-    function searchCMS(titleToSearch) {
-      const itemElements = document.querySelectorAll('[data-element="cms-item"]');
-      const titleElements = document.querySelectorAll('[data-element="cms-title"]');
-      console.log("CMS Item Elements:", itemElements);
-      console.log("CMS Title Elements:", titleElements);
-      const searchQuery = titleToSearch.toLowerCase();
-      titleElements.forEach((titleElement, index) => {
-        const titleText = titleElement.textContent?.toLowerCase();
-        const correspondingItem = itemElements[index];
-        if (correspondingItem) {
-          if (titleText && titleText.includes(searchQuery)) {
-            correspondingItem.style.display = "block";
-          } else {
-            correspondingItem.style.display = "none";
-          }
-        }
-      });
-    }
-    const searchInput = document.querySelector('[data-element="cms-search"]');
-    if (searchInput) {
-      searchInput.addEventListener("input", function() {
-        const titleToSearch = this.value;
-        searchCMS(titleToSearch);
-      });
-    }
-  });
+  if (window.Webflow) {
+    window.Webflow.push(async () => {
+      const name = "YOGA";
+      greetUser(name);
+      if (window.gsap) {
+        let loopTl = gsap.timeline({ repeat: -1, yoyo: true });
+        loopTl.to(".hero-image", { y: "-1rem", duration: 1, ease: "power1.inOut" });
+        const loadTl = gsap.timeline();
+        loadTl.from(".title-wrap", { opacity: 0, y: "6rem", duration: 5 });
+        loadTl.from(".image1", { scale: 0, stagger: { amount: 0.5 }, duration: 2 });
+        loadTl.from(".hero-image", { opacity: 0, scale: 0.8, duration: 1 });
+      }
+    });
+  }
 })();
 //# sourceMappingURL=index.js.map
